@@ -1,4 +1,4 @@
-name: Build and Push and Test
+name: CI
 
 env:
   REPO_NAME: ghcr.io/bugbearr/mock-echo-server
