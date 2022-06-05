@@ -45,7 +45,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${REPO_NAME}
+          images: ${{ env.REPO_NAME }}
           tags: |
             type=schedule
             type=schedule,pattern={{date 'YYYYMMDD[T]HHmm[Z]'}}
