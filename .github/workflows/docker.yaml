@@ -1,5 +1,8 @@
 name: Build and Push and Test
 
+env:
+  REPO_NAME: ghcr.io/bugbearr/mock-echo-server
+
 on:
   push:
     paths:
@@ -42,7 +45,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/bugbearr/hello
+          images: ${REPO_NAME}
           tags: |
             type=schedule
             type=schedule,pattern={{date 'YYYYMMDD[T]HHmm[Z]'}}
