@@ -2,6 +2,7 @@ USER_NAME=bugbearr
 IMAGE_NAME=mock-echo-server
 REGISTRY=ghcr.io
 REPO_NAME=${REGISTRY}/${USER_NAME}/${IMAGE_NAME}
+REPO_VER=latest
 PORT=8007
 
 .PHONY: all
@@ -22,17 +23,7 @@ build: .build_done
 test:
 	-docker stop test-${IMAGE_NAME}
 	-docker rm test-${IMAGE_NAME}
-	docker run --name test-${IMAGE_NAME} -d -p${PORT}:${PORT} ${REPO_NAME}
-	cat expected.txt | nc localhost ${PORT} >/tmp/result.txt
-	docker stop test-${IMAGE_NAME}
-	diff /tmp/result.txt expected.txt
-	-docker rm test-${IMAGE_NAME}
-
-.PHONY: test-edge
-test-edge:
-	-docker stop test-${IMAGE_NAME}
-	-docker rm test-${IMAGE_NAME}
-	docker run --name test-${IMAGE_NAME} -d -p${PORT}:${PORT} ${REPO_NAME}:edge
+	docker run --name test-${IMAGE_NAME} -d -p${PORT}:${PORT} ${REPO_NAME}:${REPO_VER}
 	cat expected.txt | nc localhost ${PORT} >/tmp/result.txt
 	docker stop test-${IMAGE_NAME}
 	diff /tmp/result.txt expected.txt

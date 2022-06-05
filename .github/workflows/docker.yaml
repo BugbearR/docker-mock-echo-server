@@ -89,4 +89,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Test
-        run: make test-edge
+        run: make test REPO_VER=${GITHUB_SHA::7}
